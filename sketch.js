@@ -48,8 +48,6 @@ function setup() {
   box8 = new BoxClass(790,350,35,50);
   box9 = new BoxClass(800,320,35,50)
 
- polygon = Bodies.circle(50,200,20);
- World.add(world,polygon);
 
  //slingShot = new slingShot(polygon,{x:100,y:200});
 
@@ -86,7 +84,13 @@ function draw() {
   box7.display();
   box8.display();
   box9.display();
-
-  polygon.display();
+  
+  polygon();
   drawSprites();
+}
+
+function polygon(){
+  
+  var polygon = Bodies.circle(100,100,10);
+ World.add(world,polygon);
 }
