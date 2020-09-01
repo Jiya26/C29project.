@@ -9,8 +9,12 @@ var block8,block9,block10,block11,block12;
 var block13,block14,block15,block16;
 var box1,box2,box3,box4,box5;
 var box6,box7,box8,box9;
-var polygon;
+var polygon,polygonImg;
 var slingShot;
+
+function preload(){
+     polygonImg=loadImage("polygon.Img.png")
+}
 
 function setup() {
   var canvas = createCanvas(1200,700);
@@ -18,6 +22,10 @@ function setup() {
   
 	engine = Engine.create();
   world = engine.world;
+  
+  polygon = Bodies.circle(100,100,10);
+  World.add(world,polygon);
+  
   
   ground = new Ground(400,600,249,15);
   block1 = new BoxClass(430,580,35,50);
@@ -49,7 +57,7 @@ function setup() {
   box9 = new BoxClass(800,320,35,50)
 
 
- //slingShot = new slingShot(polygon,{x:100,y:200});
+ slingShot = new slingShot(polygon.body,{x:100,y:200});
 
   Engine.run(engine);
 }
@@ -84,13 +92,15 @@ function draw() {
   box7.display();
   box8.display();
   box9.display();
-  
-  polygon();
+
+  imageMode(CENTER);
+  image(polygonImg,polygon.position.x,polygon.position.y,50,50);
+
   drawSprites();
 }
-
-function polygon(){
-  
-  var polygon = Bodies.circle(100,100,10);
- World.add(world,polygon);
+function mouseDragged(){
+  Matter.Body.setPosition(polygon.body, {x: mouseX , y: mouseY});
+}
+function mouseReleased(){
+  slingshot.fly();
 }
