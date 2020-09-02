@@ -13,7 +13,7 @@ var polygon,polygonImg;
 var slingShot;
 
 function preload(){
-     polygonImg=loadImage("polygon.Img.png")
+     polygonImg=loadImage("polygonImg.png")
 }
 
 function setup() {
@@ -57,7 +57,7 @@ function setup() {
   box9 = new BoxClass(800,320,35,50)
 
 
- slingShot = new slingShot(polygon.body,{x:100,y:200});
+ slingShot = new SlingShot(polygon.body,{x:100,y:200});
 
   Engine.run(engine);
 }
@@ -92,15 +92,10 @@ function draw() {
   box7.display();
   box8.display();
   box9.display();
-
-  imageMode(CENTER);
-  image(polygonImg,polygon.position.x,polygon.position.y,50,50);
+  polygon.display();
 
   drawSprites();
 }
 function mouseDragged(){
   Matter.Body.setPosition(polygon.body, {x: mouseX , y: mouseY});
-}
-function mouseReleased(){
-  slingshot.fly();
 }
